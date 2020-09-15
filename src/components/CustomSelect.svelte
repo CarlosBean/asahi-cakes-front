@@ -33,7 +33,7 @@
   <select name="dropdown" class="capitalize" bind:value={selected}>
     {#each options as option, index}
       {#if option}
-        <option value={option.value}>{option.name}</option>
+        <option value={option}>{option.name}</option>
       {:else}
         <option value={index + 1}>{index + 1}</option>
       {/if}

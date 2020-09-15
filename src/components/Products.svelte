@@ -7,11 +7,10 @@
       desc:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt cum alias consequatur sapiente eveniet officia excepturi iste quas, hic magnam?",
       sizes: [
-        { name: "pequeña", value: 10000 },
-        { name: "mediana", value: 18000 },
-        { name: "grande", value: 34000 },
+        { name: "pequeña", value: 10000, stock: 3 },
+        { name: "mediana", value: 18000, stock: 4 },
+        { name: "grande", value: 34000, stock: 5 },
       ],
-      stock: 5,
     },
     {
       imageurl: "./images/frutos_pastel.jpg",
@@ -19,11 +18,10 @@
       desc:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt cum alias consequatur sapiente eveniet officia excepturi iste quas, hic magnam?",
       sizes: [
-        { name: "pequeña", value: 12000 },
-        { name: "mediana", value: 22000 },
-        { name: "grande", value: 38000 },
+        { name: "pequeña", value: 12000, stock: 4 },
+        { name: "mediana", value: 22000, stock: 2 },
+        { name: "grande", value: 38000, stock: 5 },
       ],
-      stock: 10,
     },
     {
       imageurl: "./images/oreo_pastel.jpg",
@@ -31,11 +29,10 @@
       desc:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt cum alias consequatur sapiente eveniet officia excepturi iste quas, hic magnam?",
       sizes: [
-        { name: "pequeña", value: 12000 },
-        { name: "mediana", value: 24000 },
-        { name: "grande", value: 36000 },
+        { name: "pequeña", value: 12000, stock: 1 },
+        { name: "mediana", value: 24000, stock: 8 },
+        { name: "grande", value: 36000, stock: 2 },
       ],
-      stock: 7,
     },
     {
       imageurl: "./images/fresa_pastel.jpg",
@@ -43,11 +40,10 @@
       desc:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt cum alias consequatur sapiente eveniet officia excepturi iste quas, hic magnam?",
       sizes: [
-        { name: "pequeña", value: 9000 },
-        { name: "mediana", value: 17000 },
-        { name: "grande", value: 32000 },
+        { name: "pequeña", value: 9000, stock: 4 },
+        { name: "mediana", value: 17000, stock: 3 },
+        { name: "grande", value: 32000, stock: 1 },
       ],
-      stock: 2,
     },
   ];
 </script>

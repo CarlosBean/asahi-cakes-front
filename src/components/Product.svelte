@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Product } from "../models/product";
+  import type { Product, Size } from "../models/product";
 
   import CustomSelect from "../components/CustomSelect.svelte";
   export let product: Product;
@@ -9,7 +9,7 @@
     currency: "COP",
   });
 
-  let selectedSize: number;
+  let selectedSize: Size;
   let selectedQuantity: number;
 
   function formatCurrency(value: number): string {
@@ -45,6 +45,7 @@
 
   .thumbnail-info p {
     font-size: 14px;
+    color: lightslategray;
   }
 </style>
 
@@ -54,18 +55,23 @@
     <h4 class="capitalize">Torta de {product.name}</h4>
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
 
-    <h5>{formatCurrency(selectedSize * selectedQuantity)}</h5>
+    {#if selectedSize}
+      <h5>{formatCurrency(selectedSize.value * selectedQuantity)}</h5>
+    {/if}
 
     <CustomSelect
       label="Tamaño"
       options={product.sizes}
       bind:selected={selectedSize} />
 
-    <CustomSelect
-      label="Cantidad"
-      options={Array(product.stock)}
-      bind:selected={selectedQuantity} />
+    {#if selectedSize}
+      <CustomSelect
+        label="Cantidad"
+        options={Array(selectedSize.stock)}
+        bind:selected={selectedQuantity} />
+    {/if}
 
-    <button>Añadir</button>
+    <button class="primary">Agregar</button>
+    <!-- <button>Vaciar</button> -->
   </div>
 </div>

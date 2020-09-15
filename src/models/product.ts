@@ -3,10 +3,10 @@ export interface Product {
     name: string;
     desc: string;
     sizes: Size[];
-    stock: number;
 }
 
 export interface Size {
     name: string;
     value: number;
+    stock: number;
 }
