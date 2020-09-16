@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher, onDestroy } from "svelte";
+  import { count } from "../services/shopping.store";
 
   const dispatch = createEventDispatcher();
   const close = () => dispatch("close");
@@ -57,5 +58,5 @@
     <img class="icon" src="./icons/whatsapp.svg" alt="whatsapp.svg" />
     <span>Enviar</span>
   </button>
-  <!-- <button on:click={close}>Vaciar</button> -->
+  <button on:click={count.reset}>Vaciar</button>
 </div>

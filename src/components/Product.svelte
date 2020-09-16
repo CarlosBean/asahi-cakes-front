@@ -1,7 +1,8 @@
 <script lang="ts">
   import type { Product, Size } from "../models/product";
-
   import CustomSelect from "../components/CustomSelect.svelte";
+  import { count } from "../services/shopping.store";
+
   export let product: Product;
 
   const currency = new Intl.NumberFormat("es-CO", {
@@ -11,10 +12,6 @@
 
   let selectedSize: Size;
   let selectedQuantity: number;
-
-  function formatCurrency(value: number): string {
-    return currency.format(value);
-  }
 </script>
 
 <style>
@@ -56,7 +53,7 @@
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
 
     {#if selectedSize}
-      <h5>{formatCurrency(selectedSize.value * selectedQuantity)}</h5>
+      <h5>{currency.format(selectedSize.value * selectedQuantity)}</h5>
     {/if}
 
     <CustomSelect
@@ -71,7 +68,8 @@
         bind:selected={selectedQuantity} />
     {/if}
 
-    <button class="primary">Agregar</button>
-    <!-- <button>Vaciar</button> -->
+    <button
+      class="primary"
+      on:click={() => count.increment(selectedQuantity)}>Agregar</button>
   </div>
 </div>

@@ -3,6 +3,7 @@
   import Products from "./components/Products.svelte";
   import Footer from "./components/Footer.svelte";
   import ShoppingModal from "./components/ShoppingModal.svelte";
+  import { count } from "./services/shopping.store";
   export let name: string;
 
   let showModal = false;
@@ -39,6 +40,21 @@
     box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.4);
     bottom: 320px;
   }
+
+  .counter {
+    height: 18px;
+    width: 18px;
+    background-color: white;
+    color: tomato;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    text-align: center;
+    margin: auto;
+    font-size: 12px;
+    font-weight: 400;
+  }
 </style>
 
 <Navbar />
@@ -48,6 +64,7 @@
 </main>
 <button class="fab-modal" on:click={() => (showModal = true)}>
   <img src="./icons/shopping-cart.svg" alt="shopping-cart.svg" width="25" />
+  <span class="counter">{$count}</span>
 </button>
 <Products />
 <Footer />
