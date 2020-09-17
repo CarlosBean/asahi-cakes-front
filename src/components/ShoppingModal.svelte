@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher, onDestroy } from "svelte";
   import { count } from "../services/shopping.store";
+  import { orders } from "../services/orders.store";
 
   const dispatch = createEventDispatcher();
   const close = () => dispatch("close");
@@ -47,16 +48,21 @@
     <img class="icon s2" src="./icons/factura.svg" alt="factura.svg" />
     <span>Mi pedido</span>
   </h4>
-  <p>Nombre: Carlos Benavides</p>
+  <!--  <p>Nombre: Carlos Benavides</p>
   <p>Dirección: Carrera 28 # 5 -13</p>
   <p>Barrio: Las Orquideas</p>
   <p>2 tortas de durazno pequeñas - $ 20.000</p>
   <p>1 torta de Chocolate mediana - $ 24.000</p>
   <p>Total pedido $44.000</p>
-  <p>Voy a pagar con: $50.000</p>
+  <p>Voy a pagar con: $50.000</p> -->
+  {#if $orders}
+    {#each $orders as order}
+      <p>{order.name}</p>
+    {/each}
+  {/if}
   <button class="primary">
     <img class="icon" src="./icons/whatsapp.svg" alt="whatsapp.svg" />
     <span>Enviar</span>
   </button>
-  <button on:click={count.reset}>Vaciar</button>
+  <button on:click={count.reset} on:click={orders.reset}>Vaciar</button>
 </div>

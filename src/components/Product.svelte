@@ -2,6 +2,7 @@
   import type { Product, Size } from "../models/product";
   import CustomSelect from "../components/CustomSelect.svelte";
   import { count } from "../services/shopping.store";
+  import { orders } from "../services/orders.store";
 
   export let product: Product;
 
@@ -70,6 +71,7 @@
 
     <button
       class="primary"
-      on:click={() => count.increment(selectedQuantity)}>Agregar</button>
+      on:click={() => count.increment(selectedQuantity)}
+      on:click={() => orders.add(product)}>Agregar</button>
   </div>
 </div>

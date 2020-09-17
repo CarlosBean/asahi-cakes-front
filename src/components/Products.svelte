@@ -2,6 +2,7 @@
   import Product from "./Product.svelte";
   let products = [
     {
+      id: "1",
       imageurl: "./images/durazno_pastel.jpg",
       name: "durazno",
       desc:
@@ -13,6 +14,7 @@
       ],
     },
     {
+      id: "2",
       imageurl: "./images/frutos_pastel.jpg",
       name: "frutos",
       desc:
@@ -24,6 +26,7 @@
       ],
     },
     {
+      id: "3",
       imageurl: "./images/oreo_pastel.jpg",
       name: "chocolate",
       desc:
@@ -35,6 +38,7 @@
       ],
     },
     {
+      id: "4",
       imageurl: "./images/fresa_pastel.jpg",
       name: "fresa",
       desc:
