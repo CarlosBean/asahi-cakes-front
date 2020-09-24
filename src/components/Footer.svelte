@@ -4,7 +4,6 @@
     place-content: center;
     height: 25px;
     border-top: 1px solid lightgray;
-    margin-top: 1em;
   }
 
   footer span {

@@ -11,10 +11,12 @@
 
 <style>
   main {
+    min-height: calc(100% - (50px + 26px));
+  }
+
+  .banner {
     text-align: center;
     padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
   }
 
   h1 {
@@ -59,14 +61,17 @@
 
 <Navbar />
 <main>
-  <h1>Hello {name}!</h1>
-  <p>Nuestros pasteles únicos a tu alcance</p>
+  <div class="banner">
+    <h1>Hello {name}!</h1>
+    <p>Nuestros pasteles únicos a tu alcance</p>
+  </div>
+
+  <Products />
 </main>
 <button class="fab-modal" on:click={() => (showModal = true)}>
   <img src="./icons/shopping-cart.svg" alt="shopping-cart.svg" width="25" />
   <span class="counter">{$count}</span>
 </button>
-<Products />
 <Footer />
 
 {#if showModal}
