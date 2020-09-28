@@ -1,17 +1,34 @@
 import { writable } from 'svelte/store';
-import type { Product } from '../models/product'
-const { subscribe, set, update } = writable(<Product[]>[]);
+import type { Order } from '../models/order'
+const { subscribe, set, update } = writable(<Order[]>[]);
 
 function init() {
     const orderList = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
     set(orderList);
 }
 
-function setOrders(product: Product, isAdd: boolean) {
-    update(products => {
-        isAdd ? products.push(product) : products.filter(item => item.id !== product.id);
-        localStorage.setItem('cart', JSON.stringify(products));
-        return products;
+function add(order: Order) {
+    update(orders => {
+        let index = orders.findIndex(item => item.id === order.id && item.size === order.size);
+
+        if (index >= 0) {
+            orders[index].quantity = orders[index].quantity + order.quantity;
+            orders[index].price = orders[index].quantity * order.price;
+        } else {
+            order.price = order.price * order.quantity;
+            orders.push(order);
+        }
+
+        localStorage.setItem('cart', JSON.stringify(orders));
+        return orders;
+    });
+}
+
+function remove(order: Order) {
+    update(orders => {
+        let filtered = orders.filter(item => item.id !== order.id && item.size !== order.size);
+        localStorage.setItem('cart', JSON.stringify(orders));
+        return filtered;
     });
 }
 
@@ -24,8 +41,8 @@ function createCount() {
     init();
     return {
         subscribe,
-        add: (product: Product) => setOrders(product, true),
-        remove: (product: Product) => setOrders(product, false),
+        add,
+        remove,
         reset
     };
 }

@@ -1,5 +1,7 @@
 <script lang="ts">
   import type { Product, Size } from "../models/product";
+  import type { Order } from "../models/order";
+
   import CustomSelect from "../components/CustomSelect.svelte";
   import { count } from "../services/shopping.store";
   import { orders } from "../services/orders.store";
@@ -13,6 +15,20 @@
 
   let selectedSize: Size;
   let selectedQuantity: number;
+
+  function buildOrder(product: Product, size: Size, quantity: number): Order {
+    let order: Order = {
+      id: product.id,
+      imageurl: product.imageurl,
+      name: product.name,
+      desc: product.desc,
+      size: size.name,
+      price: size.value,
+      quantity,
+    };
+
+    return order;
+  }
 </script>
 
 <style>
@@ -72,6 +88,6 @@
     <button
       class="primary"
       on:click={() => count.increment(selectedQuantity)}
-      on:click={() => orders.add(product)}>Agregar</button>
+      on:click={() => orders.add(buildOrder(product, selectedSize, selectedQuantity))}>Agregar</button>
   </div>
 </div>

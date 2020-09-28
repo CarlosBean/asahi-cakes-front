@@ -9,5 +9,5 @@ export interface Product {
 export interface Size {
     name: string;
     value: number;
-    stock: number;
+    stock?: number;
 }

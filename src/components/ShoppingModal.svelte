@@ -1,10 +1,18 @@
-<script>
+<script lang="ts">
   import { createEventDispatcher, onDestroy } from "svelte";
   import { count } from "../services/shopping.store";
   import { orders } from "../services/orders.store";
 
   const dispatch = createEventDispatcher();
   const close = () => dispatch("close");
+
+  let totalPrice: number;
+
+  const unsubscribe = orders.subscribe((orders) => {
+    totalPrice = orders.reduce((sum, order) => sum + order.price, 0);
+  });
+
+  onDestroy(unsubscribe);
 </script>
 
 <style>
@@ -57,8 +65,10 @@
   <p>Voy a pagar con: $50.000</p> -->
   {#if $orders}
     {#each $orders as order}
-      <p>{order.name}</p>
+      <p>{order.quantity} x {order.name} {order.size} - $ {order.price}</p>
+      <button on:click={() => orders.remove(order)}>X</button>
     {/each}
+    <p>Total pedido $ {totalPrice}</p>
   {/if}
   <button class="primary">
     <img class="icon" src="./icons/whatsapp.svg" alt="whatsapp.svg" />
