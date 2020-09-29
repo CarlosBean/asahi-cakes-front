@@ -2,16 +2,13 @@
   import type { Product, Size } from "../models/product";
   import type { Order } from "../models/order";
 
-  import CustomSelect from "../components/CustomSelect.svelte";
-  import { count } from "../services/shopping.store";
   import { orders } from "../services/orders.store";
+  import { count } from "../services/shopping.store";
+  import { currency } from "../utils/currency";
+
+  import CustomSelect from "../components/CustomSelect.svelte";
 
   export let product: Product;
-
-  const currency = new Intl.NumberFormat("es-CO", {
-    style: "currency",
-    currency: "COP",
-  });
 
   let selectedSize: Size;
   let selectedQuantity: number;

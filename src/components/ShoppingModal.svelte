@@ -2,6 +2,7 @@
   import { createEventDispatcher, onDestroy } from "svelte";
   import { count } from "../services/shopping.store";
   import { orders } from "../services/orders.store";
+  import { currency } from "../utils/currency";
 
   const dispatch = createEventDispatcher();
   const close = () => dispatch("close");
@@ -26,6 +27,9 @@
     bottom: 0;
     right: 0;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .shopping-modal h4,
@@ -37,42 +41,65 @@
     font-size: 14px;
   }
 
+  .order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .order-item p {
+    margin-bottom: 0;
+  }
+
   .close-button {
     position: absolute;
     top: 0;
     right: 0;
     padding: 1.5em;
-    cursor: pointer;
   }
 </style>
 
 <div class="shopping-modal">
-  <span class="close-button" on:click={close}><img
+  <span class="close-button">
+    <img
+      class="pointer"
+      on:click={close}
       src="icons/times.svg"
       alt="times.svg"
       width="20" />
   </span>
-  <h4>
-    <img class="icon s2" src="./icons/factura.svg" alt="factura.svg" />
-    <span>Mi pedido</span>
-  </h4>
-  <!--  <p>Nombre: Carlos Benavides</p>
-  <p>Dirección: Carrera 28 # 5 -13</p>
-  <p>Barrio: Las Orquideas</p>
-  <p>2 tortas de durazno pequeñas - $ 20.000</p>
-  <p>1 torta de Chocolate mediana - $ 24.000</p>
-  <p>Total pedido $44.000</p>
-  <p>Voy a pagar con: $50.000</p> -->
-  {#if $orders}
-    {#each $orders as order}
-      <p>{order.quantity} x {order.name} {order.size} - $ {order.price}</p>
-      <button on:click={() => orders.remove(order)}>X</button>
-    {/each}
-    <p>Total pedido $ {totalPrice}</p>
-  {/if}
-  <button class="primary">
-    <img class="icon" src="./icons/whatsapp.svg" alt="whatsapp.svg" />
-    <span>Enviar</span>
-  </button>
-  <button on:click={count.reset} on:click={orders.reset}>Vaciar</button>
+  <div>
+    <h4 style="margin-bottom: 2em">
+      <img class="icon s2" src="./icons/factura.svg" alt="factura.svg" />
+      <span>Mi pedido</span>
+    </h4>
+    {#if $orders}
+      {#each $orders as order}
+        <div class="order-item">
+          <p>
+            {order.quantity} x {order.name}
+            {order.size}
+            <span class="bold">{currency.format(order.price)}</span>
+          </p>
+          <img
+            on:click={() => count.decrement(order.quantity)}
+            on:click={() => orders.remove(order)}
+            class="icon m-0 pointer"
+            src="./icons/trash.svg"
+            alt="trash.svg" />
+        </div>
+        <hr />
+      {/each}
+      <p>
+        Total pedido <span class="bold">{currency.format(totalPrice)}</span>
+      </p>
+    {/if}
+  </div>
+  <div>
+    <button class="primary">
+      <img class="icon" src="./icons/whatsapp.svg" alt="whatsapp.svg" />
+      <span>Enviar</span>
+    </button>
+    <button on:click={count.reset} on:click={orders.reset}>Vaciar</button>
+  </div>
 </div>

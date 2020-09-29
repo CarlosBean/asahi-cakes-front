@@ -26,9 +26,10 @@ function add(order: Order) {
 
 function remove(order: Order) {
     update(orders => {
-        let filtered = orders.filter(item => item.id !== order.id && item.size !== order.size);
+        let index = orders.findIndex(item => item.id === order.id && item.size === order.size);
+        orders.splice(index, 1);
         localStorage.setItem('cart', JSON.stringify(orders));
-        return filtered;
+        return orders;
     });
 }
 
